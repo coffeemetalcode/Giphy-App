@@ -1,3 +1,4 @@
 # Giphy-App
-A WebApp using the Giphy API
+Spiffy Giphy!
 
+Click a button to get Gifs. Make your own buttons to get even more Gifs.
