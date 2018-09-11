@@ -35,8 +35,9 @@ $(document).ready(function () {
       .then(function (response) {
         // console.log(queryURL);
         // console.log(this); // Not grabbing dynamically created buttons
-        console.log(response);
-        console.log(queryURL);
+        console.log("button key: " + buttonKey);
+        console.log("response: " + response);
+        console.log("url: " + queryURL);
 
         var results = response.data;
       });
@@ -44,4 +45,3 @@ $(document).ready(function () {
   });
 
 });
-
