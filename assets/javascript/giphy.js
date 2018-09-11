@@ -6,11 +6,9 @@ $(document).ready(function () {
   // preset buttons
   for (var i = 0; i < buttonPresets.length; i++) {
     var pButton = $("<button>");
-    // pButton.attr("data-gif", buttonPresets[i]);
-    pButton.attr({"data-gif": buttonPresets[i], "class": "gif-button"});
+    pButton.attr({ "data-gif": buttonPresets[i], "class": "gif-button" });
     pButton.text(buttonPresets[i]);
     $("#gif-buttons").append(pButton);
-    // console.log(pButton);
   };
 
   // dynamically add buttons in response to user input
@@ -18,12 +16,9 @@ $(document).ready(function () {
     event.preventDefault();
     var newButton = $("#new-button").val().trim();
     var uButton = $("<button>")
-    // uButton.attr("data-gif", newButton);
-    uButton.attr({"data-gif": newButton, "class": "gif-button"});
+    uButton.attr({ "data-gif": newButton, "class": "gif-button" });
     uButton.text(newButton);
     $("#gif-buttons").append(uButton);
-    // console.log(newButton);
-
   });
 
   $(".gif-button").on("click", function () {
@@ -39,8 +34,9 @@ $(document).ready(function () {
 
       .then(function (response) {
         // console.log(queryURL);
-
+        // console.log(this); // Not grabbing dynamically created buttons
         console.log(response);
+        console.log(queryURL);
 
         var results = response.data;
       });
