@@ -1,18 +1,51 @@
 // on page load, run the script
 $(document).ready(function () {
+
   var buttonPresets = ["Guitar", "Bass", "Drums"];
 
+  // preset buttons
   for (var i = 0; i < buttonPresets.length; i++) {
-    var pButton = $("<button>").text(buttonPresets[i]);
+    var pButton = $("<button>");
+    // pButton.attr("data-gif", buttonPresets[i]);
+    pButton.attr({"data-gif": buttonPresets[i], "class": "gif-button"});
+    pButton.text(buttonPresets[i]);
     $("#gif-buttons").append(pButton);
-    console.log(buttonPresets.length);
-  }
+    // console.log(pButton);
+  };
 
+  // dynamically add buttons in response to user input
   $("#add").on("click", function () {
     event.preventDefault();
     var newButton = $("#new-button").val().trim();
-    var uButton = $("<button>").text(newButton);
+    var uButton = $("<button>")
+    // uButton.attr("data-gif", newButton);
+    uButton.attr({"data-gif": newButton, "class": "gif-button"});
+    uButton.text(newButton);
     $("#gif-buttons").append(uButton);
+    // console.log(newButton);
+
+  });
+
+  $(".gif-button").on("click", function () {
+
+    var buttonKey = $(this).attr("data-gif");
+
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + buttonKey + "&limit=10&offset=0&rating=G&lang=en&api_key=2xfMpJncr9W7kUV9H6FwTD1Q7hjjbrPb";
+
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    })
+
+      .then(function (response) {
+        // console.log(queryURL);
+
+        console.log(response);
+
+        var results = response.data;
+      });
+
   });
 
 });
+
