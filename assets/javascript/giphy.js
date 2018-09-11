@@ -21,7 +21,8 @@ $(document).ready(function () {
     $("#gif-buttons").append(uButton);
   });
 
-  $(".gif-button").on("click", function () {
+
+  $(document).on('click', '.gif-button', function () {
 
     var buttonKey = $(this).attr("data-gif");
 
@@ -40,6 +41,21 @@ $(document).ready(function () {
         console.log("url: " + queryURL);
 
         var results = response.data;
+
+        for (var j = 0; j < results.length; j++) {
+
+          var gifDiv = $("<div>");
+          var p = $("<p>").text("Rating: " + results[i].rating);
+          var gifImg = $("<img>");
+
+          gifImg.attr("src", results[i].images.fixed_height.url);
+
+          gifDiv.append(p);
+          gifDiv.append(gifImg);
+
+          $("#gifs").prepend(gifDiv);
+
+        }
       });
 
   });
