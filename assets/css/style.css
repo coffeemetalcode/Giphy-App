@@ -9,6 +9,12 @@
   margin-bottom: 15px;
 }
 
+#add {
+  background-color: #bbb;
+  color: #333;
+  border: 0px;
+}
+
 body {
   width: 1280px;
   margin: auto;
@@ -16,4 +22,9 @@ body {
 
 .jumbotron {
   font-size: 200%;
+}
+
+#gifs {
+  position: absolute;
+  float: left;
 }

@@ -1,7 +1,7 @@
 // on page load, run the script
 $(document).ready(function () {
 
-  var buttonPresets = ["Guitar", "Bass", "Drums"];
+  var buttonPresets = ["Guitar", "Bass", "Drums", "Gorilla", "Banana", "Banana Guitar"];
 
   // preset buttons
   for (var i = 0; i < buttonPresets.length; i++) {
@@ -25,7 +25,7 @@ $(document).ready(function () {
 
     var buttonKey = $(this).attr("data-gif");
 
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + buttonKey + "&limit=3&offset=0&rating=G&lang=en&api_key=2xfMpJncr9W7kUV9H6FwTD1Q7hjjbrPb";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + buttonKey + "&limit=5&offset=0&rating=G&lang=en&api_key=2xfMpJncr9W7kUV9H6FwTD1Q7hjjbrPb";
 
     $.ajax({
       url: queryURL,
