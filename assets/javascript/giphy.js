@@ -3,7 +3,7 @@ $(document).ready(function () {
 
   var buttonPresets = ["Guitar", "Bass", "Drums", "Gorilla", "Banana", "Banana Guitar", "Jem", "Hurdy Gurdy", "Mask"];
 
-  // preset buttons
+  // preset buttons for all inexes in the buttonPresets array // this could be directed dynamically
   for (var i = 0; i < buttonPresets.length; i++) {
     var pButton = $("<button>");
     pButton.attr({ "data-gif": buttonPresets[i], "class": "gif-button" });
@@ -21,6 +21,7 @@ $(document).ready(function () {
     $("#gif-buttons").append(uButton);
   });
 
+  // Push gifs into DOM on a button click
   $(document).on('click', '.gif-button', function () {
 
     var buttonKey = $(this).attr("data-gif");
@@ -34,27 +35,27 @@ $(document).ready(function () {
 
       .then(function (response) {
         console.log(queryURL);
-        console.log(this); // Not grabbing dynamically created buttons
+        console.log(this);
         console.log("button key: " + buttonKey);
         console.log("response: " + response);
         console.log("url: " + queryURL);
 
         var results = response.data;
 
+        // create urls for gifs based on search criteria and push them into the DOM
         for (var k = 0; k < results.length; k++) {
-          var q = results[k];
+          var q = results[k]; // these three lines shorten subsequent variable calls
           var qStill = q.images.fixed_height_still.url;
           var qAnimate = q.images.fixed_height.url;
-          // var dataState = "animate";
 
-          var gifDiv = $("<div>");
+          var gifDiv = $("<div>"); // these three lines set up html elements for the DOM
           var p = $("<p>").text("Rating: " + q.rating);
-          // var gifImg = $(`<img class='spiffy-gif' src='${qAnimate}' data-animate='${qAnimate}' data-still='${qStill}'`);
-
           var gifImg = $("<img class='spiffy-gif'>");
 
+          // add relevant attributes to the <img> tag
           gifImg.attr({ "src": qAnimate, "data-state": "animate", "data-animate": qAnimate, "data-still": qStill });
 
+          // dynamically push gifs to the DOM
           gifDiv.append(p);
           gifDiv.append(gifImg);
 
@@ -68,12 +69,11 @@ $(document).ready(function () {
 
 });
 
+//  stop and start animation in response to user clicks on gif images
 $(document).on("click", ".spiffy-gif", function () {
-  // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+  // I copied this section almost verbatim from the pausing-gifs activity
   var state = $(this).attr("data-state");
-  // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-  // Then, set the image's data-state to animate
-  // Else set src to the data-still value
+
   if (state === "still") {
     $(this).attr("src", $(this).attr("data-animate"));
     $(this).attr("data-state", "animate");
