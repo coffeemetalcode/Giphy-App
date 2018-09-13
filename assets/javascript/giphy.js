@@ -1,7 +1,7 @@
 // on page load, run the script
 $(document).ready(function () {
 
-  var buttonPresets = ["Guitar", "Bass", "Drums", "Gorilla", "Banana", "Banana Guitar"];
+  var buttonPresets = ["Guitar", "Bass", "Drums", "Gorilla", "Banana", "Banana Guitar", "Jem", "Hurdy Gurdy", "Mask"];
 
   // preset buttons
   for (var i = 0; i < buttonPresets.length; i++) {

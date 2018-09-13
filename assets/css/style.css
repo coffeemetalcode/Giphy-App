@@ -9,6 +9,10 @@
   margin-bottom: 15px;
 }
 
+form {
+  padding-top: 9px;
+}
+
 #add {
   background-color: #bbb;
   color: #333;
@@ -18,6 +22,7 @@
 body {
   width: 1280px;
   margin: auto;
+  font-size: 125%;
 }
 
 .jumbotron {
