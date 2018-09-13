@@ -21,12 +21,11 @@ $(document).ready(function () {
     $("#gif-buttons").append(uButton);
   });
 
-
   $(document).on('click', '.gif-button', function () {
 
     var buttonKey = $(this).attr("data-gif");
 
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + buttonKey + "&limit=10&offset=0&rating=G&lang=en&api_key=2xfMpJncr9W7kUV9H6FwTD1Q7hjjbrPb";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + buttonKey + "&limit=3&offset=0&rating=G&lang=en&api_key=2xfMpJncr9W7kUV9H6FwTD1Q7hjjbrPb";
 
     $.ajax({
       url: queryURL,
@@ -34,21 +33,27 @@ $(document).ready(function () {
     })
 
       .then(function (response) {
-        // console.log(queryURL);
-        // console.log(this); // Not grabbing dynamically created buttons
+        console.log(queryURL);
+        console.log(this); // Not grabbing dynamically created buttons
         console.log("button key: " + buttonKey);
         console.log("response: " + response);
         console.log("url: " + queryURL);
 
         var results = response.data;
 
-        for (var j = 0; j < results.length; j++) {
+        for (var k = 0; k < results.length; k++) {
+          var q = results[k];
+          var qStill = q.images.fixed_height_still.url;
+          var qAnimate = q.images.fixed_height.url;
+          // var dataState = "animate";
 
           var gifDiv = $("<div>");
-          var p = $("<p>").text("Rating: " + results[i].rating);
-          var gifImg = $("<img>");
+          var p = $("<p>").text("Rating: " + q.rating);
+          // var gifImg = $(`<img class='spiffy-gif' src='${qAnimate}' data-animate='${qAnimate}' data-still='${qStill}'`);
 
-          gifImg.attr("src", results[i].images.fixed_height.url);
+          var gifImg = $("<img class='spiffy-gif'>");
+
+          gifImg.attr({ "src": qAnimate, "data-state": "animate", "data-animate": qAnimate, "data-still": qStill });
 
           gifDiv.append(p);
           gifDiv.append(gifImg);
@@ -56,8 +61,25 @@ $(document).ready(function () {
           $("#gifs").prepend(gifDiv);
 
         }
+
       });
 
   });
+
+});
+
+$(document).on("click", ".spiffy-gif", function () {
+  // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+  var state = $(this).attr("data-state");
+  // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+  // Then, set the image's data-state to animate
+  // Else set src to the data-still value
+  if (state === "still") {
+    $(this).attr("src", $(this).attr("data-animate"));
+    $(this).attr("data-state", "animate");
+  } else {
+    $(this).attr("src", $(this).attr("data-still"));
+    $(this).attr("data-state", "still");
+  }
 
 });

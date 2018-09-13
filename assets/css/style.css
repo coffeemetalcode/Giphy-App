@@ -8,3 +8,12 @@
   margin-right: 15px;
   margin-bottom: 15px;
 }
+
+body {
+  width: 1280px;
+  margin: auto;
+}
+
+.jumbotron {
+  font-size: 200%;
+}
